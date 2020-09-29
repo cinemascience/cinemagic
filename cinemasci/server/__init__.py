@@ -23,14 +23,12 @@ def set_install_path():
     # edit the path to get the correct installation path
     CinemaInstallPath = CinemaInstallPath.strip("/server")
     CinemaInstallPath = "/" + CinemaInstallPath + "/viewers"
-    print("CinemaInstallPath: {}".format(CinemaInstallPath))
 
 def get_relative_install_path( initpath ):
     global CinemaInstallPath 
 
     result = path.join(CinemaInstallPath, initpath.strip("/"))
     result = relpath(result, getcwd())
-    print("REL IN PATH: {}".format(result))
     return result
 
 #
@@ -41,7 +39,7 @@ def get_relative_install_path( initpath ):
 class CinemaRequestHandler(http.server.SimpleHTTPRequestHandler):
 
     def log(self, message):
-        if True:
+        if False:
             print(message)
 
     def do_GET(self):
@@ -117,6 +115,5 @@ def run_cinema_server( viewer, data, port, assetname=None):
         urlstring = "{}:{}/?viewer={}&databases={}".format(localhost, port, viewer, data)
         if not assetname is None:
             urlstring = urlstring + "&assetname{}".format(assetname)
-        print(urlstring)
         httpd.serve_forever()
 
